@@ -1,46 +1,45 @@
 #pragma once
+#include <SFML/Graphics.hpp>
+#include <ctime>
 #include <iostream>
 #include <vector>
-#include <ctime>
-#include <SFML/Graphics.hpp>
 
+class Game {
+private:
+  sf::RenderWindow *_window;
+  sf::Event ev;
 
-class Game
-{
-private	:
-	sf::RenderWindow* _window;
-	sf::Event ev;
+  void initializeVariables();
+  void initWindow();
+  void initEnemies();
 
-	void initializeVariables();
-	void initWindow();
-	void initEnemies();
 public:
-	// Constructors / Desctructors
-	Game();
-	virtual ~Game();
+  // Constructors / Desctructors
+  Game();
+  virtual ~Game();
 
-	// Game Objects
-	std::vector<sf::RectangleShape> enemies;
-	sf::RectangleShape enemy;
-	sf::Vector2i mousePosition;
+  // Game Objects
+  std::vector<sf::RectangleShape> enemies;
+  sf::RectangleShape enemy;
+  sf::Vector2i mousePosition;
+  sf::Vector2f mousePositionInWindow;
 
-	int points;
-	float enemySpawnTimer;
-	float enemySpawnTimerMax;
-	int maxEnemies;
+  int points;
+  float enemySpawnTimer;
+  float enemySpawnTimerMax;
+  int maxEnemies;
 
-	// Accessors
-	const bool isRunning() const;
+  // Accessors
+  const bool isRunning() const;
 
-	// Functions
-	void update();
-	void render();
+  // Functions
+  void update();
+  void render();
 
-	void updateMousePosition();
-	void updateEvents();
+  void updateMousePosition();
+  void updateEvents();
 
-	void updateEnemies();
-	void renderEnemies();
-	void spawnEnemy();
+  void updateEnemies();
+  void renderEnemies();
+  void spawnEnemy();
 };
-
