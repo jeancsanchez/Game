@@ -11,6 +11,7 @@ private:
 
   void initializeVariables();
   void initWindow();
+  void initHero();
   void initEnemies();
 
 public:
@@ -21,6 +22,8 @@ public:
   // Game Objects
   std::vector<sf::RectangleShape> enemies;
   sf::RectangleShape enemy;
+  sf::Sprite hero;
+  sf::Texture heroTexture;
   sf::Vector2i mousePosition;
   sf::Vector2f mousePositionInWindow;
 
@@ -38,6 +41,9 @@ public:
 
   void updateMousePosition();
   void updateEvents();
+
+  void updateHero();
+  void renderHero();
 
   void updateEnemies();
   void renderEnemies();
