@@ -56,13 +56,15 @@ void Game::initHero() {
   this->hero.setScale(0.5f, 0.6f);
 }
 
-void Game::initEnemies() {
-  this->enemy.setPosition(sf::Vector2f(10.0f, 10.0f));
-  this->enemy.setSize(sf::Vector2f(70.0f, 60.0f));
-  this->enemy.setScale(sf::Vector2f(0.4f, 0.4f));
-  this->enemy.setFillColor(sf::Color::Blue);
-  this->enemy.setOutlineColor(sf::Color::White);
-  this->enemy.setOutlineThickness(3.f);
+void Game::initEnemies() {  
+  if (!this->enemyTexture.loadFromFile("assets/rock.png")) {
+    std::cout << "ERROR::GAME::COULD NOT LOAD BACKGROUND TEXTURE"
+              << "\n";
+  }
+
+  this->enemy.setTexture(this->enemyTexture);
+  this->enemy.setTextureRect(sf::IntRect(0, 0, 33, 33));
+  this->enemy.setScale(1.3f, 1.3f);
 }
 
 void Game::updateMousePosition() {
@@ -125,7 +127,7 @@ void Game::renderEnemies() {
 
 void Game::spawnEnemy() {
   int randomX = rand() % static_cast<int>((this->_window->getSize().x));
-  int enemyX = this->enemy.getSize().x;
+  int enemyX = this->enemy.getTextureRect().width;
   int newPosition = randomX - enemyX;
 
   this->enemy.setPosition(newPosition, 0.f);

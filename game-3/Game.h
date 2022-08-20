@@ -20,8 +20,9 @@ public:
   virtual ~Game();
 
   // Game Objects
-  std::vector<sf::RectangleShape> enemies;
-  sf::RectangleShape enemy;
+  std::vector<sf::Sprite> enemies;
+  sf::Sprite enemy;
+  sf::Texture enemyTexture;
   sf::Sprite hero;
   sf::Texture heroTexture;
   sf::Vector2i mousePosition;
