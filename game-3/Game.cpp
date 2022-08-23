@@ -41,22 +41,22 @@ void Game::initWindow() {
 }
 
 void Game::initHero() {
-  //this->hero = sf::CircleShape(30);
-  //this->hero.setPosition(sf::Vector2f(10.0f, 10.0f));
-  //this->hero.setScale(sf::Vector2f(0.5f, 0.5f));
-  //this->hero.setFillColor(sf::Color::White);
+  // this->hero = sf::CircleShape(30);
+  // this->hero.setPosition(sf::Vector2f(10.0f, 10.0f));
+  // this->hero.setScale(sf::Vector2f(0.5f, 0.5f));
+  // this->hero.setFillColor(sf::Color::White);
 
-
-  if(!this->heroTexture.loadFromFile("assets/hero-x.png")) {
+  if (!this->heroTexture.loadFromFile("assets/hero-x.png")) {
     std::cout << "ERROR::GAME::COULD NOT LOAD BACKGROUND TEXTURE"
               << "\n";
   }
 
   this->hero.setTexture(this->heroTexture);
   this->hero.setScale(0.5f, 0.6f);
+  this->hero.setPosition(this->_window->getSize().x /2 , this->_window->getSize().y - this->hero.getGlobalBounds().height);
 }
 
-void Game::initEnemies() {  
+void Game::initEnemies() {
   if (!this->enemyTexture.loadFromFile("assets/rock.png")) {
     std::cout << "ERROR::GAME::COULD NOT LOAD BACKGROUND TEXTURE"
               << "\n";
@@ -90,11 +90,15 @@ void Game::updateEvents() {
 }
 
 void Game::updateHero() {
-  sf::Vector2f mousePosition = this->mousePositionInWindow;
-  float newX = mousePosition.x - (this->hero.getTextureRect().width / 2);
-  float newY = mousePosition.y - this->hero.getTextureRect().height;
+  int speed = 1.f;
 
-  this->hero.setPosition(sf::Vector2f(newX, newY));
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    this->hero.move(-0.1f, 0.f);
+  }
+  
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+      this->hero.move(0.1f, 0.f);
+  }
 }
 
 void Game::updateEnemies() {
